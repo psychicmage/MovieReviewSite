@@ -1,0 +1,19 @@
+# 이클립스 프로젝트 파일은 포함 (삭제 금지!)
+# .project, .classpath, .settings/ 은 커밋한다!
+
+# 컴파일 결과물은 무조건 무시
+/bin/
+/build/
+/target/
+
+# 로그, 시스템 파일 등 무시
+*.log
+.DS_Store
+Thumbs.db
+
+# WEB-INF/lib 폴더에 필요한 JAR만 추적
+/WebContent/WEB-INF/lib/*
+!/WebContent/WEB-INF/lib/sqlite-jdbc*.jar
+
+# DB 파일 포함
+!/WebContent/WEB-INF/db/movies.db
