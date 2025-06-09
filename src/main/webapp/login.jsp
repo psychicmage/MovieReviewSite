@@ -1,48 +1,80 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
-<%@ page import="model.dao.UserDAO" %>
-<%
-    request.setCharacterEncoding("UTF-8");
-
-    String message = "";
-
-    if ("POST".equalsIgnoreCase(request.getMethod())) {
-        try {
-            int userId = Integer.parseInt(request.getParameter("userId"));
-            String password = request.getParameter("password");
-
-            String dbPath = application.getRealPath("/WEB-INF/db/movies.db");
-            boolean success = UserDAO.login(userId, password, dbPath);
-
-            if (success) {
-                session.setAttribute("userId", userId);
-                response.sendRedirect("main.jsp");
-                return;
-            } else {
-                message = "❌ 로그인 실패! 아이디 또는 비밀번호를 확인하세요.";
-            }
-        } catch (Exception e) {
-            message = "❌ 잘못된 입력입니다.";
-        }
-    }
-%>
-
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>로그인</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+    	.form-container {
+        	max-width: 400px;
+        	margin: 120px auto;
+        	padding: 30px;
+        	background-color: #1c1c1c;
+        	border-radius: 10px;
+        	color: white;
+        	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        	text-align: center;
+    	}
+
+    	.form-title {
+ 		   background-color: #ff0558;
+    		padding: 8px 16px;
+    		border-radius: 8px;
+    		font-size: 22px;
+    		font-weight: bold;
+    		color: white;
+    		display: inline-block;
+    		margin: 0 auto 25px auto; /* 위-오른쪽-아래-왼쪽 */
+		}
+
+    	.form-group {
+        	margin-bottom: 20px;
+        	text-align: left;
+    	}
+
+    	.form-group label {
+        	display: block;
+        	margin-bottom: 8px;
+        	font-weight: bold;
+    	}
+
+    	.form-group input {
+        	width: 100%;
+        	padding: 10px;
+        	background-color: #333;
+        	border: 1px solid #555;
+        	border-radius: 5px;
+        	color: white;
+        	box-sizing: border-box;
+    	}
+
+    	.button-row {
+	        display: flex;
+    	    justify-content: space-between;
+        	margin-top: 25px;
+    	}
+	</style>
 </head>
 <body>
-    <h2>🔐 로그인</h2>
-    <form method="post">
-        <label>아이디 (숫자): <input type="number" name="userId" required></label><br><br>
-        <label>비밀번호: <input type="password" name="password" required></label><br><br>
-        <button type="submit">로그인</button>
-    </form>
-    <% if (!message.isEmpty()) { %>
-        <p style="color:red;"><%= message %></p>
-    <% } %>
-    <br>
-    <a href="main.jsp">← 메인으로</a>
+    <div class="form-container">
+        <div class="form-title">로그인</div>
+
+        <form action="loginProcess.jsp" method="post">
+            <div class="form-group">
+                <label for="id">아이디 (숫자)</label>
+                <input type="text" name="id" id="id" required>
+            </div>
+            <div class="form-group">
+                <label for="password">비밀번호</label>
+                <input type="password" name="password" id="password" required>
+            </div>
+
+            <div class="button-row">
+                <button type="submit" class="ButtonAreaButton1">로그인</button>
+                <a href="register.jsp"><button type="button" class="ButtonAreaButton2">회원가입</button></a>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

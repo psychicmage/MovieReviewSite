@@ -6,7 +6,7 @@ import model.dto.ReviewDTO;
 
 public class ReviewDAO {
 
-    public static List<ReviewDTO> findByMovie(int movieId, Connection conn) {
+    public static List<ReviewDTO> findByMovieId(int movieId, Connection conn) {
         List<ReviewDTO> list = new ArrayList<>();
         String sql = """
             SELECT r.review_id, r.user_id, u.username, r.rating, r.review, r.review_date

@@ -1,0 +1,235 @@
+/* === Global Styles === */
+body {
+    background-color: black;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* ⛔ 좌우 스크롤 방지 */
+    color: white;
+}
+
+/* === Header Bar === */
+.header-wrapper {
+    width: 100%;
+    background-color: #1a1a1a;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
+}
+
+.header {
+    max-width: 1440px; /* 넓이 확장 */
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    box-sizing: border-box;
+}
+
+
+/* 왼쪽: 로고 + 검색창 묶음 */
+.left-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* 오른쪽: 로그인/회원가입 버튼 */
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff0558; /* Watcha 스타일 컬러 */
+}
+
+.search input, .SearchBar {
+    padding: 8px 15px;
+    height: 35px;
+    width: 300px;
+    background-color: #242424;
+    border-radius: 5px;
+    border: 1px solid rgb(128, 128, 128);
+    color: white;
+}
+
+.search input::placeholder,
+.SearchBar::placeholder {
+    color: #aaa;
+}
+
+.ButtonAreaButton1 {
+    border-radius: 5px;
+    width: 60px;
+    height: 30px;
+    font-size: 12px;
+    color: white;
+    border: none;
+    background-color: rgb(24, 24, 24);
+}
+.ButtonAreaButton1:hover {
+    background-color: rgb(61, 61, 61);
+}
+
+.ButtonAreaButton2 {
+    border-radius: 5px;
+    width: 60px;
+    height: 30px;
+    font-size: 12px;
+    color: white;
+    border: none;
+    background-color: rgb(255, 6, 122);
+}
+.ButtonAreaButton2:hover {
+    background-color: rgb(255, 39, 140);
+}
+
+/* === Main Content Area === */
+.main {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 120px 30px 50px 30px; /* 헤더 때문에 padding-top 크게 */
+    box-sizing: border-box;
+}
+
+/* === Card Layout === */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card {
+    cursor: pointer;
+    width: 250px;
+    border: 1px solid rgb(80, 80, 80);
+    background-color: #1c1c1c;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    color: white;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 10px;
+}
+
+.card-content h3 {
+    margin: 0;
+    font-size: 18px;
+    color: white;
+}
+
+.card-content p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #ccc;
+}
+
+/* === Footer Links === */
+.links {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.links a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+.movie-detail-card {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.movie-detail-card .card-image img {
+  width: 300px;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.movie-detail-card .card-content {
+  flex: 1;
+  color: white;
+}
+/* 드롭다운 전체 감싸는 박스 */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* 사용자 이름 버튼 스타일 (핑크색) */
+.dropdown-btn {
+    background-color: rgb(255, 6, 122);
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* 드롭다운 숨겨진 메뉴 */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #333;
+    min-width: 120px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    z-index: 1000;
+}
+
+/* 메뉴 항목 */
+.dropdown-content a {
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #444;
+}
+
+/* 버튼 위에 마우스를 올리면 메뉴 보이기 */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.review-simple {
+  color: white;
+  background-color: #1c1c1c;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: 1px solid #444;
+}
+.review-simple p {
+  margin: 6px 0;
+}

@@ -6,10 +6,11 @@ public class MovieDTO {
     private String releaseDate;
     private double averageRating;
 
-    private String overview;       // ✅ 줄거리 필드 추가
+    private String overview;       // 줄거리
     private String director;
     private String mainCast;
     private String keywordList;
+    private String genres;         // ✅ 장르 필드 추가
 
     public MovieDTO() {}
 
@@ -20,6 +21,7 @@ public class MovieDTO {
         this.averageRating = averageRating;
     }
 
+    // 모든 getter/setter 추가
     public int getMovieId() { return movieId; }
     public void setMovieId(int movieId) { this.movieId = movieId; }
 
@@ -32,8 +34,8 @@ public class MovieDTO {
     public double getAverageRating() { return averageRating; }
     public void setAverageRating(double averageRating) { this.averageRating = averageRating; }
 
-    public String getOverview() { return overview; }               // ✅ getter
-    public void setOverview(String overview) { this.overview = overview; } // ✅ setter
+    public String getOverview() { return overview; }
+    public void setOverview(String overview) { this.overview = overview; }
 
     public String getDirector() { return director; }
     public void setDirector(String director) { this.director = director; }
@@ -43,4 +45,7 @@ public class MovieDTO {
 
     public String getKeywordList() { return keywordList; }
     public void setKeywordList(String keywordList) { this.keywordList = keywordList; }
+
+    public String getGenres() { return genres; }
+    public void setGenres(String genres) { this.genres = genres; }
 }

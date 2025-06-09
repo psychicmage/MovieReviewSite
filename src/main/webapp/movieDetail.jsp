@@ -1,9 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
-<%@ page import="java.sql.*, java.util.List" %>
-<%@ page import="model.util.DBUtil" %>
-<%@ page import="model.dao.MovieDAO, model.dao.ReviewDAO" %>
-<%@ page import="model.dto.MovieDTO, model.dto.ReviewDTO" %>
-
+<%@ page import="java.util.*, java.sql.*, model.util.DBUtil, model.dao.MovieDAO, model.dao.ReviewDAO, model.dto.MovieDTO, model.dto.ReviewDTO" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%
     request.setCharacterEncoding("UTF-8");
 
@@ -12,79 +8,125 @@
     Connection conn = DBUtil.getConnection(dbPath);
 
     MovieDTO movie = MovieDAO.findById(movieId, conn);
-    List<ReviewDTO> reviews = ReviewDAO.findByMovie(movieId, conn);
+    List<ReviewDTO> reviews = ReviewDAO.findByMovieId(movieId, conn);
 
     if (conn != null) conn.close();
 
-    // 키워드 해시태그 처리
-    String keywords = movie.getKeywordList();
-    String hashtagString = "";
-    if (keywords != null && !keywords.isEmpty()) {
-        String[] keywordArr = keywords.split(",");
-        for (String k : keywordArr) {
-            hashtagString += "#" + k.trim() + " ";
-        }
-    }
+    Object userObj = session.getAttribute("userId");
 %>
 
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title><%= movie.getTitle() %> - 상세정보</title>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        pre {
-            background-color: #f8f8f8;
-            padding: 12px;
-            border: 1px solid #ccc;
-            width: 60%;
-        }
-        .review { margin-bottom: 1em; }
-    </style>
+  <meta charset="UTF-8">
+  <title><%= movie.getTitle() %> - 상세 정보</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .movie-info-container {
+        display: flex;
+        gap: 30px;
+        align-items: flex-start;
+        margin-bottom: 50px;
+    }
+
+    .poster-box img {
+        width: 300px;
+        height: 450px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .info-box {
+        color: white;
+        max-width: 700px;
+    }
+
+    .info-box p {
+        margin: 8px 0;
+    }
+
+    .review-section {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .review-simple {
+        background-color: #1c1c1c;
+        color: white;
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        border: 1px solid #444;
+    }
+
+    .review-simple p {
+        margin: 5px 0;
+    }
+  </style>
 </head>
 <body>
-    <h2>🎬 영화 상세 정보</h2>
-	<div>
-        <img src="posters/<%= movie.getMovieId() %>.jpg"
-             alt="영화 포스터"
-             width="200"
-             onerror="this.onerror=null; this.src='posters/default.jpg';">
-    </div>
-    
-    <pre>
-제목       : <%= movie.getTitle() %>
-개봉일     : <%= movie.getReleaseDate() %>
-감독       : <%= movie.getDirector() != null ? movie.getDirector() : "정보 없음" %>
-주연       : <%= movie.getMainCast() != null ? movie.getMainCast() : "정보 없음" %>
-키워드     : <%= !hashtagString.isEmpty() ? hashtagString : "정보 없음" %>
-줄거리     : <%= movie.getOverview() != null ? movie.getOverview() : "정보 없음" %>
-평균 평점 : <%= String.format("%.1f", movie.getAverageRating()) %>
-    </pre>
 
-    <hr>
-    <h3>📝 리뷰 목록</h3>
-    <% if (reviews.isEmpty()) { %>
-        <p>등록된 리뷰가 없습니다.</p>
-    <% } else { %>
-        <% for (ReviewDTO r : reviews) { %>
-            <div class="review">
-                👤 <strong><%= r.getUsername() %></strong><br>
-                ⭐ <%= r.getRating() %>점<br>
-                "<%= r.getReview() %>"<br>
-                🕓 <%= r.getReviewDate() %>
+  <div class="header-wrapper">
+    <div class="header">
+      <div class="left-section">
+        <div class="logo">IPP-6조</div>
+        <div class="search">
+          <input type="text" class="SearchBar" placeholder="영화 제목을 검색해주세요.">
+        </div>
+      </div>
+
+      <div class="right-section">
+        <% if (userObj == null) { %>
+          <a href="login.jsp"><button class="ButtonAreaButton1">로그인</button></a>
+          <a href="register.jsp"><button class="ButtonAreaButton2">회원가입</button></a>
+        <% } else { %>
+          <div class="dropdown">
+            <button class="dropdown-btn">
+              <%= session.getAttribute("username") %> ▼
+            </button>
+            <div class="dropdown-content">
+              <a href="mypage.jsp">마이페이지</a>
+              <a href="logout.jsp">로그아웃</a>
             </div>
+          </div>
         <% } %>
-    <% } %>
+      </div>
+    </div>
+  </div>
 
-    <hr>
-    <% if (session.getAttribute("userId") != null) { %>
-        <a href="reviewForm.jsp?movieId=<%= movie.getMovieId() %>">✍ 리뷰 작성</a>
-    <% } else { %>
-        <p><a href="login.jsp">로그인</a> 후 리뷰를 작성할 수 있습니다.</p>
-    <% } %>
+  <div class="main">
+    <h1 style="text-align: center;"><%= movie.getTitle() %></h1>
 
-    <br><br>
-    <a href="main.jsp">← 메인으로 돌아가기</a>
+    <div class="movie-info-container">
+      <div class="poster-box">
+        <img src="posters/<%= movie.getMovieId() %>.jpg" alt="<%= movie.getTitle() %>">
+      </div>
+      <div class="info-box">
+        <p><strong>개봉일:</strong> <%= movie.getReleaseDate() %></p>
+        <p><strong>장르:</strong> <%= movie.getGenres() %></p>
+        <p><strong>감독:</strong> <%= movie.getDirector() %></p>
+        <p><strong>주연:</strong> <%= movie.getMainCast() %></p>
+        <p><strong>줄거리:</strong><br><%= movie.getOverview() %></p>
+        <p><strong>키워드:</strong> <%= movie.getKeywordList() %></p>
+        <p><strong>평균 평점:</strong> ⭐ <%= String.format("%.1f", movie.getAverageRating()) %></p>
+      </div>
+    </div>
+
+    <div class="review-section">
+      <h2 style="text-align:center;">📝 리뷰</h2>
+      <%
+        for (ReviewDTO r : reviews) {
+      %>
+      <div class="review-simple">
+        <p><strong>작성자:</strong> <%= r.getUserId() %>번 사용자</p>
+        <p><strong>평점:</strong> ⭐ <%= r.getRating() %></p>
+        <p><%= r.getReview() %></p>
+      </div>
+      <%
+        }
+      %>
+    </div>
+  </div>
+
 </body>
 </html>
