@@ -12,10 +12,11 @@
 ## 지금까지
 1. `model` : `dao`, `dto`, `DBUtil` 정의 해놓은 패키지 (MVC의 model 부분)
 2. `main.jsp` : 메인 화면 (영화 목록 출력 + 로그인/회원가입)
-3. `movieDetail.jsp` : 메인에서 영화 클릭하면 이동하는 영화 상세 페이지
+3. `movieDetail.jsp` : 메인에서 영화 클릭하면 이동하는 영화 상세 페이지 + 포스터 추가
 4. `login.jsp`/ `register.jsp` : 로그인/회원가입 (아직 로그아웃 기능 없음)
+* 참고로 포스터 경로는 `posters/<%= movie.getMovieId() %>.jpg` 이렇게 사용하면 됩니다
 
 ## to-do
 1. css 가져오기
-2. 영화 포스터 이미지 가져오기
+2. 메인 화면에 포스터랑 같이 정보 띄우기
 3. 그 외 기능 구현

@@ -45,6 +45,13 @@
 </head>
 <body>
     <h2>🎬 영화 상세 정보</h2>
+	<div>
+        <img src="posters/<%= movie.getMovieId() %>.jpg"
+             alt="영화 포스터"
+             width="200"
+             onerror="this.onerror=null; this.src='posters/default.jpg';">
+    </div>
+    
     <pre>
 제목       : <%= movie.getTitle() %>
 개봉일     : <%= movie.getReleaseDate() %>

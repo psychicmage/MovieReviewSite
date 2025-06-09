@@ -12,8 +12,12 @@
 Thumbs.db
 
 # WEB-INF/lib 폴더에 필요한 JAR만 추적
-/WebContent/WEB-INF/lib/*
-!/WebContent/WEB-INF/lib/sqlite-jdbc*.jar
+/webapp/WEB-INF/lib/*
+!/webapp/WEB-INF/lib/sqlite-jdbc*.jar
 
 # DB 파일 포함
-!/WebContent/WEB-INF/db/movies.db
+!/webapp/WEB-INF/db/movies.db
+
+# 포스터 이미지 포함
+!/webapp/posters/*
+!/webapp/posters/*.jpg
