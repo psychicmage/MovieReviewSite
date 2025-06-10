@@ -17,36 +17,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-  <!-- ✅ 상단 헤더 -->
-  <div class="header-wrapper">
-    <div class="header">
-      <div class="left-section">
-        <div class="logo">IPP-6조</div>
-        <div class="search">
-          <input type="text" class="SearchBar" placeholder="영화 제목을 검색해주세요.">
-        </div>
-      </div>
-
-      <div class="right-section">
-        <% if (userObj == null) { %>
-          <a href="login.jsp"><button class="ButtonAreaButton1">로그인</button></a>
-          <a href="register.jsp"><button class="ButtonAreaButton2">회원가입</button></a>
-        <% } else { %>
-          <div class="dropdown">
-            <button class="dropdown-btn">
-              <%= session.getAttribute("username") %> ▼
-            </button>
-            <div class="dropdown-content">
-              <a href="mypage.jsp">마이페이지</a>
-              <a href="logout.jsp">로그아웃</a>
-            </div>
-          </div>
-        <% } %>
-      </div>
-    </div>
-  </div>
-
+ <%@ include file="navbar.jsp" %>
   <!-- ✅ 메인 영화 목록 영역 -->
   <div class="main">
     <h1 style="text-align: center;">Movie List</h1>
@@ -68,6 +39,6 @@
       %>
     </div>
   </div>
-
+  <%@ include file="footer.jsp" %>
 </body>
 </html>

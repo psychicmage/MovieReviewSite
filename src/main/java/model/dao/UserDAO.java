@@ -43,4 +43,27 @@ public class UserDAO {
             return false;
         }
     }
+    
+    public static UserDTO findById(int userId, String dbPath) {
+        String sql = "SELECT * FROM users WHERE user_id = ?";
+        try (Connection conn = DBUtil.getConnection(dbPath);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, userId);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                UserDTO user = new UserDTO();
+                user.setUserId(rs.getInt("user_id"));
+                user.setUsername(rs.getString("username"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password")); // 보안상 마이페이지에서 쓸 일 없으면 생략해도 됨
+                return user;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
