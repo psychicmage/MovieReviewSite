@@ -2,23 +2,22 @@
 <%@ page import="java.sql.*, model.util.DBUtil" %>
 <%
     request.setCharacterEncoding("UTF-8");
-    int id = Integer.parseInt(request.getParameter("id"));
+    String username = request.getParameter("username");
     String password = request.getParameter("password");
 
     String dbPath = application.getRealPath("/WEB-INF/db/movies.db");
     Connection conn = DBUtil.getConnection(dbPath);
     boolean loginSuccess = false;
-
-    String username = null;
+	int userId = -1;
 
     try {
-        String sql = "SELECT username FROM users WHERE user_id = ? AND password = ?";
+        String sql = "SELECT user_id FROM users WHERE username = ? AND password = ?";
         PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setInt(1, id);
+        pstmt.setString(1, username);
         pstmt.setString(2, password);
         ResultSet rs = pstmt.executeQuery();
         if (rs.next()) {
-            username = rs.getString("username");
+            userId = rs.getInt("user_id");
             loginSuccess = true;
         }
         rs.close();
@@ -29,7 +28,7 @@
     }
 
     if (loginSuccess) {
-        session.setAttribute("userId", id);
+        session.setAttribute("userId", userId);
         session.setAttribute("username", username);
         response.sendRedirect("main.jsp");
     } else {

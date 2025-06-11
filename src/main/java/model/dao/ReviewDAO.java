@@ -34,4 +34,19 @@ public class ReviewDAO {
         }
         return list;
     }
+    
+    public static boolean insertReview(Connection conn, int movieId, int userId, double rating, String reviewText) {
+        String sql = "INSERT INTO reviews (movie_id, user_id, rating, review, review_date) VALUES (?, ?, ?, ?, datetime('now'))";
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, movieId);
+            pstmt.setInt(2, userId);
+            pstmt.setDouble(3, rating);
+            pstmt.setString(4, reviewText);
+            return pstmt.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
