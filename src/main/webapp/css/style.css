@@ -4,7 +4,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* ⛔ 좌우 스크롤 방지 */
+    overflow-x: hidden;
     color: white;
 }
 
@@ -19,7 +19,7 @@ body {
 }
 
 .header {
-    max-width: 1440px; /* 넓이 확장 */
+    max-width: 1440px;
     width: 100%;
     margin: 0 auto;
     display: flex;
@@ -29,15 +29,12 @@ body {
     box-sizing: border-box;
 }
 
-
-/* 왼쪽: 로고 + 검색창 묶음 */
 .left-section {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-/* 오른쪽: 로그인/회원가입 버튼 */
 .right-section {
     display: flex;
     align-items: center;
@@ -47,7 +44,7 @@ body {
 .logo {
     font-size: 24px;
     font-weight: bold;
-    color: #ff0558; /* Watcha 스타일 컬러 */
+    color: #ff0558;
 }
 
 .search input, .SearchBar {
@@ -65,6 +62,7 @@ body {
     color: #aaa;
 }
 
+/* === Buttons === */
 .ButtonAreaButton1 {
     border-radius: 5px;
     width: 60px;
@@ -74,6 +72,7 @@ body {
     border: none;
     background-color: rgb(24, 24, 24);
 }
+
 .ButtonAreaButton1:hover {
     background-color: rgb(61, 61, 61);
 }
@@ -87,6 +86,7 @@ body {
     border: none;
     background-color: rgb(255, 6, 122);
 }
+
 .ButtonAreaButton2:hover {
     background-color: rgb(255, 39, 140);
 }
@@ -96,7 +96,7 @@ body {
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
-    padding: 120px 30px 50px 30px; /* 헤더 때문에 padding-top 크게 */
+    padding: 120px 30px 50px 30px;
     box-sizing: border-box;
 }
 
@@ -148,7 +148,7 @@ body {
 /* === Footer Links === */
 .links {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .links a {
@@ -160,30 +160,46 @@ body {
 .links a:hover {
     text-decoration: underline;
 }
+
+/* === Movie Detail Card === */
 .movie-detail-card {
-  display: flex;
-  gap: 20px;
-  padding: 20px;
+    display: flex;
+    gap: 20px;
+    padding: 20px;
 }
 
 .movie-detail-card .card-image img {
-  width: 300px;
-  height: 450px;
-  object-fit: cover;
-  border-radius: 10px;
+    width: 300px;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 .movie-detail-card .card-content {
-  flex: 1;
-  color: white;
+    flex: 1;
+    color: white;
 }
-/* 드롭다운 전체 감싸는 박스 */
+
+/* === Review Box === */
+.review-simple {
+    background-color: #1c1c1c;
+    color: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 1px solid #444;
+}
+
+.review-simple p {
+    margin: 5px 0;
+}
+
+/* === 드롭다운 메뉴 === */
 .dropdown {
     position: relative;
     display: inline-block;
 }
 
-/* 사용자 이름 버튼 스타일 (핑크색) */
 .dropdown-btn {
     background-color: rgb(255, 6, 122);
     color: white;
@@ -194,7 +210,6 @@ body {
     cursor: pointer;
 }
 
-/* 드롭다운 숨겨진 메뉴 */
 .dropdown-content {
     display: none;
     position: absolute;
@@ -206,7 +221,6 @@ body {
     z-index: 1000;
 }
 
-/* 메뉴 항목 */
 .dropdown-content a {
     color: white;
     padding: 10px;
@@ -218,18 +232,90 @@ body {
     background-color: #444;
 }
 
-/* 버튼 위에 마우스를 올리면 메뉴 보이기 */
 .dropdown:hover .dropdown-content {
     display: block;
 }
-.review-simple {
-  color: white;
-  background-color: #1c1c1c;
-  padding: 15px;
-  margin-bottom: 20px;
-  border-radius: 10px;
-  border: 1px solid #444;
+
+/* === Form 스타일 === */
+.form-container {
+    max-width: 400px;
+    margin: 120px auto;
+    padding: 30px;
+    background-color: #1c1c1c;
+    border-radius: 10px;
+    color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    text-align: center;
 }
-.review-simple p {
-  margin: 6px 0;
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.form-title {
+    background-color: #ff0558;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    display: inline-block;
+    margin: 0 auto 25px auto;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    border: 1px solid #555;
+    border-radius: 5px;
+    color: white;
+    box-sizing: border-box;
+}
+
+.button-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+
+/* === 영화 상세 정보 레이아웃 === */
+.movie-info-container {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    margin-bottom: 50px;
+}
+
+.poster-box img {
+    width: 300px;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.info-box {
+    color: white;
+    max-width: 700px;
+}
+
+.info-box p {
+    margin: 8px 0;
+}
+
+.review-section {
+    max-width: 800px;
+    margin: 0 auto;
 }

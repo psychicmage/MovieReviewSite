@@ -1,67 +1,42 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>회원가입</title>
-    <link rel="stylesheet" href="css/style.css">
-    <style>
-        .form-container {
-            max-width: 400px;
-            margin: 120px auto;
-            padding: 30px;
-            background-color: #1c1c1c;
-            border-radius: 10px;
-            color: white;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        }
-        .form-container h2 {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            background-color: #333;
-            border: 1px solid #555;
-            border-radius: 5px;
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
     <div class="form-container">
-        <h2>회원가입</h2>
+        <div class="form-title">회원가입</div>
+
         <form action="registerProcess.jsp" method="post">
             <div class="form-group">
                 <label for="id">아이디 (숫자)</label>
                 <input type="text" name="id" id="id" required>
             </div>
+
             <div class="form-group">
- 				<label for="email">이메일</label>
-  				<input type="email" name="email" id="email" required>
-			</div>
+                <label for="email">이메일</label>
+                <input type="email" name="email" id="email" required>
+            </div>
+
             <div class="form-group">
                 <label for="name">이름</label>
                 <input type="text" name="name" id="name" required>
             </div>
+
             <div class="form-group">
                 <label for="password">비밀번호</label>
                 <input type="password" name="password" id="password" required>
             </div>
-            
-            <div style="text-align: center;">
-                <button type="submit" class="ButtonAreaButton2">회원가입</button>
+
+            <div class="button-row">
+                <button type="submit" class="ButtonAreaButton1">가입</button>
+                <a href="login.jsp" class="ButtonAreaButton2" style="text-align: center; padding: 6px 12px; display: inline-block; line-height: 30px;">로그인</a>
             </div>
         </form>
     </div>
+    <%@ include file="footer.jsp" %>
 </body>
 </html>
