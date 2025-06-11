@@ -3,21 +3,21 @@
 <%
     request.setCharacterEncoding("UTF-8");
 
-    int id = Integer.parseInt(request.getParameter("id"));
+    String username = request.getParameter("username");
     String password = request.getParameter("password");
-    String name = request.getParameter("name");
     String email = request.getParameter("email");
 
     String dbPath = application.getRealPath("/WEB-INF/db/movies.db");
     Connection conn = DBUtil.getConnection(dbPath);
 
     boolean success = false;
+    int userId = -1;
 
     try {
-        // 중복 아이디 확인
-        String checkSql = "SELECT COUNT(*) FROM users WHERE user_id = ?";
+        // 중복 확인
+        String checkSql = "SELECT COUNT(*) FROM users WHERE username = ?";
         PreparedStatement checkStmt = conn.prepareStatement(checkSql);
-        checkStmt.setInt(1, id);
+        checkStmt.setString(1, username);
         ResultSet rs = checkStmt.executeQuery();
         rs.next();
         int count = rs.getInt(1);
@@ -25,19 +25,24 @@
         checkStmt.close();
 
         if (count == 0) {
-            // INSERT (이메일 포함)
-            String insertSql = "INSERT INTO users (user_id, password, username, email, created_at) VALUES (?, ?, ?, ?, datetime('now'))";
-            PreparedStatement insertStmt = conn.prepareStatement(insertSql);
-            insertStmt.setInt(1, id);
-            insertStmt.setString(2, password);
-            insertStmt.setString(3, name);
-            insertStmt.setString(4, email);
+            // INSERT (user_id는 자동 증가)
+            String insertSql = "INSERT INTO users (username, email, password, created_at) VALUES (?, ?, ?, datetime('now'))";
+            PreparedStatement insertStmt = conn.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS);
+            insertStmt.setString(1, username);
+            insertStmt.setString(2, email);
+            insertStmt.setString(3, password);
             insertStmt.executeUpdate();
+
+            // 생성된 user_id 가져오기
+            ResultSet generatedKeys = insertStmt.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                userId = generatedKeys.getInt(1);
+            }
             insertStmt.close();
 
-            // 로그인 상태 유지
-            session.setAttribute("userId", id);
-            session.setAttribute("username", name);
+            // 세션 설정
+            session.setAttribute("userId", userId);
+            session.setAttribute("username", username);
             session.setAttribute("email", email);
             success = true;
         }

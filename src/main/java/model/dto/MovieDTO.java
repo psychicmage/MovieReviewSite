@@ -5,8 +5,9 @@ public class MovieDTO {
     private String title;
     private String releaseDate;
     private double averageRating;
+    private int reviewCount;        // ✅ 리뷰 수 추가
 
-    private String overview;       // 줄거리
+    private String overview;       
     private String director;
     private String mainCast;
     private String keywordList;
@@ -34,6 +35,9 @@ public class MovieDTO {
     public double getAverageRating() { return averageRating; }
     public void setAverageRating(double averageRating) { this.averageRating = averageRating; }
 
+    public int getReviewCount() { return reviewCount; }
+    public void setReviewCount(int reviewCount) { this.reviewCount = reviewCount; }
+
     public String getOverview() { return overview; }
     public void setOverview(String overview) { this.overview = overview; }
 
@@ -48,4 +52,4 @@ public class MovieDTO {
 
     public String getGenres() { return genres; }
     public void setGenres(String genres) { this.genres = genres; }
-}
+}  
