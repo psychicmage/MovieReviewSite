@@ -1,4 +1,8 @@
-<%@ page import="java.util.*, java.sql.*, model.util.DBUtil, model.dao.MovieDAO, model.dto.MovieDTO" %>
+<%@ page import="model.util.DBUtil" %>
+<%@ page import="model.dao.MovieDAO" %>
+<%@ page import="model.dto.MovieDTO" %>
+<%@ page import="java.util.*, java.sql.*" %>
+
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%
     request.setCharacterEncoding("UTF-8");
