@@ -12,8 +12,8 @@
 
         <form action="loginProcess.jsp" method="post">
             <div class="form-group">
-                <label for="id">아이디 (숫자)</label>
-                <input type="text" name="id" id="id" required>
+                <label for="username">아이디</label>
+                <input type="text" name="username" id="username" required>
             </div>
             <div class="form-group">
                 <label for="password">비밀번호</label>

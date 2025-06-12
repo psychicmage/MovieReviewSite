@@ -14,25 +14,26 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <%@ include file="navbar.jsp" %>
+<%@ include file="navbar.jsp" %>
 
-    <div class="main">
-        <h2 style="text-align: center;">👤 내 정보</h2>
+<div class="form-container">
+    <div class="form-title">내 정보</div>
 
-        <% if (user != null) { %>
-            <p><strong>이름:</strong> <%= user.getUsername() %></p>
-            <p><strong>이메일:</strong> <%= user.getEmail() %></p>
-            <p><strong>아이디:</strong> <%= user.getUserId() %></p>
+    <% if (user != null) { %>
+        <p><strong>회원번호:</strong> <%= user.getUserId() %></p>
+        <p><strong>아이디:</strong> <%= user.getUsername() %></p>
+        <p><strong>이메일:</strong> <%= user.getEmail() %></p>
 
-            <div style="margin-top: 30px;">
-                <a href="editProfile.jsp"><button class="ButtonAreaButton1">정보 수정</button></a>
-                <a href="deleteAccount.jsp"><button class="ButtonAreaButton2">회원 탈퇴</button></a>
-            </div>
-        <% } else { %>
-            <p>❌ 로그인 정보가 없습니다.</p>
-        <% } %>
-    </div>
+        <div class="button-row" style="margin-top: 30px;">
+            <a href="editEmail.jsp"><button class="ButtonAreaButton1">이메일 변경</button></a>
+            <a href="editPassword.jsp"><button class="ButtonAreaButton1">비밀번호 변경</button></a>
+            <a href="deleteAccount.jsp"><button class="ButtonAreaButton2">회원 탈퇴</button></a>
+        </div>
+    <% } else { %>
+        <p>❌ 로그인 정보가 없습니다.</p>
+    <% } %>
+</div>
 
-    <%@ include file="footer.jsp" %>
+<%@ include file="footer.jsp" %>
 </body>
 </html>
