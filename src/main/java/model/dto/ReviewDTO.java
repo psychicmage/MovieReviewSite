@@ -7,7 +7,8 @@ public class ReviewDTO {
     private double rating;
     private String review;
     private String reviewDate;
-
+    private String title;
+    
     public int getReviewId() { return reviewId; }
     public void setReviewId(int reviewId) { this.reviewId = reviewId; }
 
@@ -25,4 +26,12 @@ public class ReviewDTO {
 
     public String getReviewDate() { return reviewDate; }
     public void setReviewDate(String reviewDate) { this.reviewDate = reviewDate; }
+    
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }
