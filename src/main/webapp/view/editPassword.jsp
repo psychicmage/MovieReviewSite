@@ -12,7 +12,7 @@
     <div class="form-container">
         <div class="form-title">비밀번호 변경</div>
 
-        <form action="editPasswordProcess.jsp" method="post">
+        <form action="controller/editPasswordAction.jsp" method="post">
             <div class="form-group">
                 <label for="currentPassword">현재 비밀번호</label>
                 <input type="password" name="currentPassword" id="currentPassword" required>

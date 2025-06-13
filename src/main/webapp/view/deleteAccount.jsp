@@ -11,16 +11,16 @@
 <head>
     <meta charset="UTF-8">
     <title>회원 탈퇴</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-<%@ include file="navbar.jsp" %>
+<%@ include file="../navbar.jsp" %>
 
 <div class="form-container">
     <div class="form-title">⚠ 회원 탈퇴</div>
     <p>정말로 탈퇴하시려면 비밀번호를 입력해주세요.</p>
 
-    <form method="post" action="deleteAccountAction.jsp" style="margin-top: 30px;">
+    <form method="post" action="../controller/deleteUserAction.jsp" style="margin-top: 30px;">
         <div class="form-group">
             <label for="password">비밀번호</label>
             <input type="password" id="password" name="password" required>
@@ -32,7 +32,6 @@
     </form>
 </div>
 
-
-<%@ include file="footer.jsp" %>
+<%@ include file="../footer.jsp" %>
 </body>
 </html>

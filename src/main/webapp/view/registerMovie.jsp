@@ -10,7 +10,7 @@
 <div class="form-container">
     <div class="form-title">🎬 영화 등록</div>
 
-    <form action="registerMovieProcess.jsp" method="post">
+    <form action="controller/registerMovieAction.jsp" method="post">
         <div class="form-group">
             <label>제목</label>
             <input type="text" name="title" required>

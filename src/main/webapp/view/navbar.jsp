@@ -2,7 +2,9 @@
 <div class="header-wrapper">
   <div class="header">
     <div class="left-section">
-      <div class="logo" onclick="location.href='main.jsp'" style="cursor: pointer;">IPP-6조</div>
+      <div class="logo" onclick="location.href='main.jsp'" style="cursor: pointer;">
+        <img src="<%= request.getContextPath() %>/posters/team6_logo.png" alt="Team 6 로고" style="height: 40px;">
+      </div>
     </div>
 
     <div class="right-section">
@@ -33,7 +35,7 @@
             <% } else { %>
               <a href="mypage.jsp">마이페이지</a>
             <% } %>
-            <a href="logout.jsp">로그아웃</a>
+            <a href="controller/logoutAction.jsp">로그아웃</a>
           </div>
         </div>
       <% } %>

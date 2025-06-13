@@ -1,16 +1,9 @@
-<%@ page import="java.util.*, java.sql.*, model.util.DBUtil, model.dao.MovieDAO, model.dao.ReviewDAO, model.dto.MovieDTO, model.dto.ReviewDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="model.dto.MovieDTO, model.dto.ReviewDTO" %>
+<%@ page import="java.util.List" %>
 <%
-    request.setCharacterEncoding("UTF-8");
-
-    int movieId = Integer.parseInt(request.getParameter("movieId"));
-    String dbPath = application.getRealPath("/WEB-INF/db/movies.db");
-    Connection conn = DBUtil.getConnection(dbPath);
-
-    MovieDTO movie = MovieDAO.findById(movieId, conn);
-    List<ReviewDTO> reviews = ReviewDAO.findByMovieId(movieId, conn);
-
-    if (conn != null) conn.close();
+    MovieDTO movie = (MovieDTO) request.getAttribute("movie");
+    List<ReviewDTO> reviews = (List<ReviewDTO>) request.getAttribute("reviews");
 %>
 
 <!DOCTYPE html>
@@ -18,10 +11,10 @@
 <head>
   <meta charset="UTF-8">
   <title><%= movie.getTitle() %> - 상세 정보</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-  <%@ include file="navbar.jsp" %>
+  <%@ include file="../navbar.jsp" %>
 
   <div class="main">
     <h1 style="text-align: center;"><%= movie.getTitle() %></h1>
@@ -29,7 +22,7 @@
     <!-- 🎬 영화 기본 정보 -->
     <div class="movie-info-container">
       <div class="poster-box">
-        <img src="posters/<%= movie.getMovieId() %>.jpg" alt="<%= movie.getTitle() %>">
+        <img src="../posters/<%= movie.getMovieId() %>.jpg" alt="<%= movie.getTitle() %>">
       </div>
       <div class="info-box">
         <p><strong>개봉일:</strong> <%= movie.getReleaseDate() %></p>
@@ -65,13 +58,14 @@
       </div>
     </div>
   </div>
+
 <%
-  Object userIdObj = session.getAttribute("userId");
-  if (userIdObj != null) {
+    Object userIdObj = session.getAttribute("userId");
+    if (userIdObj != null) {
 %>
   <div class="review-form" style="margin-top: 50px;">
     <h3>🖊 리뷰 작성</h3>
-    <form action="writeReview.jsp" method="post">
+    <form action="../controller/writeReviewAction.jsp" method="post">
       <input type="hidden" name="movieId" value="<%= movie.getMovieId() %>">
       <textarea name="reviewText" rows="4" style="width: 100%;" placeholder="리뷰를 입력하세요." required></textarea>
       <br><br>
@@ -91,6 +85,6 @@
   <p>✋ 리뷰 작성은 <a href="login.jsp">로그인</a> 후 가능합니다.</p>
 <% } %>
 
-  <%@ include file="footer.jsp" %>
+<%@ include file="../footer.jsp" %>
 </body>
 </html>
