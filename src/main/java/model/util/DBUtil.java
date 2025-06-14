@@ -5,25 +5,27 @@ import java.sql.DriverManager;
 
 public class DBUtil {
 
-    // JSP에서 전달된 실제 경로를 사용하는 버전
+    // JSP에서 application.getRealPath(...)로 넘겨받은 경로가 필요한 경우
+    // (현재는 사용 안 하지만 유지해도 무방)
     public static Connection getConnection(String fullPath) {
         try {
             Class.forName("org.sqlite.JDBC");
-            String url = "jdbc:sqlite:" + fullPath;
-            return DriverManager.getConnection(url);
+            return DriverManager.getConnection("jdbc:sqlite:" + fullPath);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    // 콘솔 등에서 사용되는 기본 경로
+    // ✅ 웹 & 콘솔 공통 사용: 절대 경로 고정 (실제 DB만 직접 접근)
     public static Connection getConnection() {
         try {
             Class.forName("org.sqlite.JDBC");
-            String path = System.getProperty("user.dir") + "/src/main/webapp/WEB-INF/db/movies.db";
-            String url = "jdbc:sqlite:" + path;
-            return DriverManager.getConnection(url);
+
+            // ❗ 본인 환경에 맞게 경로 수정
+            String dbPath = "E:/MovieReview/MovieReviewSite/db/movies.db";
+
+            return DriverManager.getConnection("jdbc:sqlite:" + dbPath);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
