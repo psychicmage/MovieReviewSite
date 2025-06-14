@@ -18,7 +18,7 @@
     <div class="form-container">
         <div class="form-title">이메일 수정</div>
 
-        <form action="editEmailProcess.jsp" method="post">
+        <form action="controller/editEmailAction.jsp" method="post">
             <div class="form-group">
                 <label for="newEmail">새 이메일</label>
                 <input type="email" name="newEmail" id="newEmail" required>

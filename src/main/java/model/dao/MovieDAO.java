@@ -72,7 +72,7 @@ public class MovieDAO {
                 movie.setDirector(rs.getString("director"));
                 movie.setMainCast(rs.getString("main_cast"));
                 movie.setKeywordList(rs.getString("keyword_list"));
-                movie.setGenres(rs.getString("genres")); // ✅ 장르도 설정
+                movie.setGenres(rs.getString("genres"));
                 return movie;
             }
         } catch (Exception e) {
@@ -80,7 +80,7 @@ public class MovieDAO {
         }
         return null;
     }
-    
+
     public static List<MovieDTO> searchByTitle(Connection conn, String keyword) {
         List<MovieDTO> list = new ArrayList<>();
         String sql = """
@@ -187,11 +187,10 @@ public class MovieDAO {
 
         return list;
     }
-    
+
     public static List<MovieDTO> findAllSorted(Connection conn, String sortOption) {
         List<MovieDTO> list = new ArrayList<>();
 
-        // 기본 정렬은 제목 오름차순
         String orderByClause = switch (sortOption) {
             case "TITLE_DESC" -> "m.title DESC";
             case "RATING_HIGH" -> "avg_rating DESC";
@@ -230,8 +229,53 @@ public class MovieDAO {
 
         return list;
     }
-    
- // MovieDAO.java
+
+    public static List<MovieDTO> findDeletedMoviesSorted(Connection conn, String sortOption) {
+        List<MovieDTO> list = new ArrayList<>();
+
+        String orderByClause = switch (sortOption) {
+            case "TITLE_DESC" -> "m.title DESC";
+            case "RATING_HIGH" -> "avg_rating DESC";
+            case "RATING_LOW" -> "avg_rating ASC";
+            case "REVIEW_COUNT_HIGH" -> "review_count DESC";
+            case "REVIEW_COUNT_LOW" -> "review_count ASC";
+            case "RELEASE_DATE" -> "m.release_date DESC";
+            default -> "m.title ASC";
+        };
+
+        String sql = """
+            SELECT m.movie_id, m.title, m.release_date,
+                   IFNULL(AVG(r.rating), 0) AS avg_rating,
+                   COUNT(r.review_id) AS review_count,
+                   k.keyword_list
+            FROM movies m
+            LEFT JOIN reviews r ON m.movie_id = r.movie_id
+            LEFT JOIN keywords k ON m.movie_id = k.movie_id
+            WHERE m.is_deleted = 1
+            GROUP BY m.movie_id
+            ORDER BY """ + orderByClause;
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                MovieDTO movie = new MovieDTO();
+                movie.setMovieId(rs.getInt("movie_id"));
+                movie.setTitle(rs.getString("title"));
+                movie.setReleaseDate(rs.getString("release_date"));
+                movie.setAverageRating(rs.getDouble("avg_rating"));
+                movie.setReviewCount(rs.getInt("review_count"));
+                movie.setKeywordList(rs.getString("keyword_list"));
+                list.add(movie);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
     public static List<MovieDTO> searchByTitleSorted(Connection conn, String keyword, String sortOption) {
         return searchWithSort(conn, keyword, sortOption, "title");
     }
@@ -273,9 +317,7 @@ public class MovieDAO {
                 WHERE g.name LIKE ?
             """);
         } else if ("keyword".equals(field)) {
-            sql.append("""
-                WHERE k.keyword_list LIKE ?
-            """);
+            sql.append("WHERE k.keyword_list LIKE ? ");
         } else {
             sql.append("WHERE m.title LIKE ? ");
         }
