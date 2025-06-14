@@ -10,7 +10,7 @@
     <div class="form-container">
         <div class="form-title">회원가입</div>
 
-        <form action="controller/registerAction.jsp" method="post">
+        <form action="registerProcess.jsp" method="post">
             <div class="form-group">
                 <label for="username">아이디</label>
                 <input type="text" name="username" id="username" required>
