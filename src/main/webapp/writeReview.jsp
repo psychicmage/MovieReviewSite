@@ -16,8 +16,7 @@
   if (conn != null) conn.close();
 
   if (success) {
-    response.sendRedirect("movieDetailAction.jsp?movieId=" + movieId);
-
+    response.sendRedirect("movieDetail.jsp?movieId=" + movieId);
   } else {
 %>
     <script>

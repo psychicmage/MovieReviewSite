@@ -21,6 +21,3 @@ Thumbs.db
 # 포스터 이미지 포함
 !/webapp/posters/*
 !/webapp/posters/*.jpg
-
-
-*.sqbpro
