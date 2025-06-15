@@ -25,7 +25,7 @@
         <label>장르(쉼표 구분): <input type="text" name="genres" value="<%= movie.getGenres() %>"></label><br>
         <label>키워드(쉼표 구분): <input type="text" name="keywordList" value="<%= movie.getKeywordList() %>"></label><br><br>
         <button type="submit">저장</button>
-        <a href="../controller/admin.jsp">취소</a>
+        <a href="../view/admin.jsp">취소</a>
     </form>
 </body>
 </html>

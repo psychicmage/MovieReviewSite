@@ -55,8 +55,6 @@
         String[] genreArray = genres.split(",");
         for (String g : genreArray) {
             String genreName = g.trim();
-
-            // 장르 ID 가져오기 또는 삽입
             String selectGenre = "SELECT genre_id FROM genres WHERE name = ?";
             int genreId = -1;
 
@@ -78,7 +76,6 @@
                 rs.close();
             }
 
-            // movie_genres에 삽입
             if (genreId > 0) {
                 String insertRel = "INSERT INTO movie_genres (movie_id, genre_id) VALUES (?, ?)";
                 try (PreparedStatement relStmt = conn.prepareStatement(insertRel)) {
@@ -101,7 +98,7 @@
 %>
     <script>
         alert("✅ 영화 정보가 성공적으로 수정되었습니다.");
-        location.href = "../controller/admin.jsp";
+        location.href = "../controller/movieDetail.jsp?movieId=<%= movieId %>";
     </script>
 <%
     } else {

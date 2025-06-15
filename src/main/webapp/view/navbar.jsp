@@ -2,7 +2,9 @@
 <div class="header-wrapper">
   <div class="header">
     <div class="left-section">
-      <div class="logo" onclick="location.href='../controller/movieList.jsp'" style="cursor: pointer;">IPP-6조</div>
+      <div class="logo" onclick="location.href='../controller/movieList.jsp'" style="cursor: pointer;">
+      	<img src="../img/logo-icon.png" alt="logo" style="height: 120px;">
+      </div>
     </div>
 
     <div class="right-section">

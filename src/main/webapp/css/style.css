@@ -26,7 +26,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 40px;
+    height: 64px;
+    padding: 0px 40px;
     box-sizing: border-box;
 }
 
@@ -390,4 +391,111 @@ body {
   color: #ccc;
   font-size: 15px;
   line-height: 1.5;
+}
+.review-textarea {
+  width: 100%;
+  padding: 10px;
+  background-color: #2a2a2a;
+  border: 1px solid #555;
+  border-radius: 8px;
+  color: white;
+  font-size: 14px;
+  resize: vertical;
+  margin-top: 5px;
+}
+
+.submit-btn-container {
+  text-align: right;
+  margin-top: 8px;
+}
+
+.submit-review-button {
+  background-color: #ff0558;
+  border: none;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.submit-review-button:hover {
+  background-color: #ff3b7c;
+}
+.sub-meta {
+  font-size: 14px;
+  color: #bbb;
+  margin-bottom: 10px;
+}
+
+.info-divider {
+  border: none;
+  border-top: 1px solid #444;
+  margin: 12px 0;
+}
+/* === Admin Page Styles === */
+.admin-container {
+  max-width: 600px;
+  margin: 120px auto;
+  background-color: #1c1c1c;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  color: white;
+  text-align: center;
+}
+
+.admin-title {
+  font-size: 26px;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.admin-section {
+  margin-bottom: 30px;
+}
+
+.admin-section h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #ff72a0;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.button-group a {
+  width: 60%;
+}
+
+.button-group button {
+  width: 100%;
+}
+/* === User Management Table === */
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 14px;
+  color: white;
+}
+
+.user-table th,
+.user-table td {
+  border: 1px solid #444;
+  padding: 10px;
+  text-align: center;
+}
+
+.user-table th {
+  background-color: #2a2a2a;
+  color: #ff72a0;
+}
+
+.user-table tr:nth-child(even) {
+  background-color: #1f1f1f;
 }
