@@ -17,7 +17,14 @@
   <meta charset="UTF-8">
   <title><%= movie.getTitle() %> - 상세 정보</title>
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .main {
+      margin-top: 140px;  /* ✅ 상단바 높이만큼 밀어주기 */
+      padding: 2rem;
+    }
+  </style>
 </head>
+
 <body>
 
   <%@ include file="navbar.jsp" %>
@@ -41,9 +48,9 @@
                 <button type="submit" class="ButtonAreaButton1">수정</button>
               </form>
               <form action="deleteMovieProcess.jsp" method="get" style="display:inline;" onsubmit="return confirm('정말 이 영화를 삭제하시겠습니까?')">
-                <input type="hidden" name="movieId" value="<%= movie.getMovieId() %>">
-                <button type="submit" class="ButtonAreaButton2">삭제</button>
-              </form>
+  				<input type="hidden" name="movieId" value="<%= movie.getMovieId() %>">
+  				<button type="submit" class="ButtonAreaButton2">삭제</button>
+			  </form>
             </div>
           <% } %>
         </div>

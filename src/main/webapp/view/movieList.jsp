@@ -13,6 +13,12 @@
   <meta charset="UTF-8">
   <title>영화 리뷰 사이트</title>
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .main {
+      margin-top: 140px;  /* ✅ 상단 navbar 가리지 않도록 여백 추가 */
+      padding: 2rem;
+    }
+  </style>
 </head>
 <body>
 

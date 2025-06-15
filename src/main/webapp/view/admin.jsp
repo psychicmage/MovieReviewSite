@@ -7,7 +7,14 @@
   <meta charset="UTF-8">
   <title>관리자 페이지</title>
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .admin-container {
+      margin-top: 140px;  /* ✅ 상단 로고 바 피해서 아래로 밀기 */
+      padding: 2rem;
+    }
+  </style>
 </head>
+
 <body>
 
   <div class="admin-container">
