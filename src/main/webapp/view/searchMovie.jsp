@@ -15,6 +15,12 @@
     <meta charset="UTF-8">
     <title>영화 검색</title>
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .main {
+            margin-top: 140px;  /* navbar 높이 피해서 아래로 밀기 */
+            padding: 2rem;
+        }
+    </style>
 </head>
 <body>
 <%@ include file="navbar.jsp" %>

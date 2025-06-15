@@ -35,7 +35,7 @@ public class DBUtil {
             Class.forName("org.sqlite.JDBC");
 
             // 프로젝트 환경에 맞게 수정할 절대 경로
-            String dbPath = "E:/MovieReview/MovieReviewSite/db/movies.db";
+            String dbPath = "C:/Users/g018r/eclipse-workspace/MovieReviewSite/db/movies.db";
 
             return DriverManager.getConnection("jdbc:sqlite:" + dbPath);
         } catch (Exception e) {

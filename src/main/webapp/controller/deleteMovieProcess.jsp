@@ -1,49 +1,47 @@
-<%@ page import="java.sql.*, model.util.DBUtil" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="java.sql.*, model.util.DBUtil, model.dao.MovieDAO" %>
 
 <%
-    // 요청 파라미터로 전달된 movieId 추출 및 검증
-    String movieIdParam = request.getParameter("movieId");
-    int movieId = 0;
+	request.setCharacterEncoding("UTF-8");
+	
+ 	//영화 ID 파라미터 추출
+	String movieIdParam = request.getParameter("movieId");
+	int movieId = 0;
 
-    try {
-        movieId = Integer.parseInt(movieIdParam);
-    } catch (NumberFormatException e) {
-        // movieId가 숫자가 아닌 경우 경고 후 이전 페이지로 이동
-        out.println("<script>alert('❌ 잘못된 요청입니다.'); location.href='../controller/deleteMovie.jsp';</script>");
-        return;
-    }
+	try {
+   	 movieId = Integer.parseInt(movieIdParam);
+	} catch (NumberFormatException e) {
+%>
+    <script>
+        alert("❌ 잘못된 요청입니다.");
+        location.href = "../controller/deleteMovie.jsp";
+    </script>
+<%
+    	return;
+	}
 
-    boolean success = false;
+	Connection conn = null;
+	boolean success = false;
 
-    // DB 연결 및 삭제 처리
-    try (Connection conn = DBUtil.getConnection()) {
+	try {
+    	conn = DBUtil.getConnection();
+    	conn.setAutoCommit(false);
 
-        // 연관된 테이블부터 삭제 (순서 중요: 자식 → 부모)
-        String[] sqls = {
-            "DELETE FROM reviews WHERE movie_id = ?",
-            "DELETE FROM credits WHERE movie_id = ?",
-            "DELETE FROM keywords WHERE movie_id = ?",
-            "DELETE FROM movie_genres WHERE movie_id = ?",
-            "DELETE FROM movies WHERE movie_id = ?"
-        };
+    //  DAO를 통해 영화 및 관련 정보 삭제
+   		MovieDAO.deleteMovie(conn, movieId);
 
-        for (String sql : sqls) {
-            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setInt(1, movieId);
-                pstmt.executeUpdate();
-            }
-        }
+    	conn.commit();
+    	success = true;
 
-        success = true;
-
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
+	} catch (Exception e) {
+    	if (conn != null) conn.rollback();//예외 발생 시 롤백 처리
+    	e.printStackTrace();
+	} finally {
+    	if (conn != null) conn.close();
+	}
 %>
 
-<!-- 삭제 결과에 따라 알림 후 영화 목록으로 이동 -->
 <script>
     alert("<%= success ? "✅ 영화가 삭제되었습니다." : "❌ 삭제 중 오류가 발생했습니다." %>");
-    location.href = "../controller/movieList.jsp";
+    location.href = "../controller/movieList.jsp"; //성공시 영화 목록 페이지로 이동
 </script>

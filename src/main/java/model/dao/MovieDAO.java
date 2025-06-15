@@ -334,4 +334,139 @@ public class MovieDAO {
 
         return list;
     }
+    /**
+     * 영화 등록 → movieId 반환
+     */
+    public static int insertMovie(Connection conn, String title, String releaseDate, String overview) throws SQLException {
+        String sql = "INSERT INTO movies (title, release_date, overview) VALUES (?, ?, ?)";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            pstmt.setString(1, title);
+            pstmt.setString(2, releaseDate);
+            pstmt.setString(3, overview);
+            pstmt.executeUpdate();
+            try (ResultSet rs = pstmt.getGeneratedKeys()) {
+                if (rs.next()) return rs.getInt(1);
+            }
+        }
+        return -1;
+    }
+
+    public static void insertCredits(Connection conn, int movieId, String director, String mainCast) throws SQLException {
+        String sql = "INSERT INTO credits (movie_id, director, main_cast) VALUES (?, ?, ?)";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, movieId);
+            pstmt.setString(2, director);
+            pstmt.setString(3, mainCast);
+            pstmt.executeUpdate();
+        }
+    }
+
+    public static void insertKeywords(Connection conn, int movieId, String keywordList) throws SQLException {
+        String sql = "INSERT INTO keywords (movie_id, keyword_list) VALUES (?, ?)";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, movieId);
+            pstmt.setString(2, keywordList);
+            pstmt.executeUpdate();
+        }
+    }
+
+    public static int getOrInsertGenre(Connection conn, String genreName) throws SQLException {
+        String selectSql = "SELECT genre_id FROM genres WHERE name = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(selectSql)) {
+            pstmt.setString(1, genreName);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) return rs.getInt("genre_id");
+        }
+
+        String insertSql = "INSERT INTO genres (name) VALUES (?)";
+        try (PreparedStatement pstmt = conn.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS)) {
+            pstmt.setString(1, genreName);
+            pstmt.executeUpdate();
+            ResultSet rs = pstmt.getGeneratedKeys();
+            if (rs.next()) return rs.getInt(1);
+        }
+
+        return -1;
+    }
+
+    public static void insertMovieGenre(Connection conn, int movieId, int genreId) throws SQLException {
+        String sql = "INSERT INTO movie_genres (movie_id, genre_id) VALUES (?, ?)";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, movieId);
+            pstmt.setInt(2, genreId);
+            pstmt.executeUpdate();
+        }
+    }
+    /**
+     * 영화 관련 모든 데이터 삭제
+     */
+    public static void deleteMovie(Connection conn, int movieId) throws SQLException {
+        String[] sqls = {
+            "DELETE FROM reviews WHERE movie_id = ?",
+            "DELETE FROM credits WHERE movie_id = ?",
+            "DELETE FROM keywords WHERE movie_id = ?",
+            "DELETE FROM movie_genres WHERE movie_id = ?",
+            "DELETE FROM movies WHERE movie_id = ?"
+        };
+
+        for (String sql : sqls) {
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, movieId);
+                pstmt.executeUpdate();
+            }
+        }
+    }
+    /**
+     * 영화 데이터 수정
+     */
+    public static void updateMovieInfo(Connection conn, int movieId, String title, String releaseDate, String overview) throws SQLException {
+        String sql = "UPDATE movies SET title = ?, release_date = ?, overview = ? WHERE movie_id = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, title);
+            pstmt.setString(2, releaseDate);
+            pstmt.setString(3, overview);
+            pstmt.setInt(4, movieId);
+            pstmt.executeUpdate();
+        }
+    }
+
+    public static void updateCredits(Connection conn, int movieId, String director, String mainCast) throws SQLException {
+        String sql = "UPDATE credits SET director = ?, main_cast = ? WHERE movie_id = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, director);
+            pstmt.setString(2, mainCast);
+            pstmt.setInt(3, movieId);
+            pstmt.executeUpdate();
+        }
+    }
+
+    public static void updateKeywords(Connection conn, int movieId, String keywordList) throws SQLException {
+        String sql = "UPDATE keywords SET keyword_list = ? WHERE movie_id = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, keywordList);
+            pstmt.setInt(2, movieId);
+            pstmt.executeUpdate();
+        }
+    }
+
+    public static void updateGenres(Connection conn, int movieId, String genres) throws SQLException {
+        try (PreparedStatement pstmt = conn.prepareStatement("DELETE FROM movie_genres WHERE movie_id = ?")) {
+            pstmt.setInt(1, movieId);
+            pstmt.executeUpdate();
+        }
+
+        String[] genreArray = genres.split(",");
+        for (String g : genreArray) {
+            String genreName = g.trim();
+            int genreId = getOrInsertGenre(conn, genreName);
+            if (genreId > 0) {
+                insertMovieGenre(conn, movieId, genreId);
+            }
+        }
+    }
+
+    
+    
+
+
 }
