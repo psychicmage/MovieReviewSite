@@ -38,5 +38,5 @@ try (Connection conn = DBUtil.getConnection()) {
 
 <script>
     alert("<%= success ? "✅ 영화가 삭제되었습니다." : "❌ 삭제 중 오류가 발생했습니다." %>");
-    location.href = "../controller/deleteMovie.jsp";
+    location.href = "../controller/movieList.jsp";
 </script>

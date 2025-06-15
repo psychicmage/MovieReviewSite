@@ -7,47 +7,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>사용자 관리</title>
-    <link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8">
+  <title>사용자 관리</title>
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-<div class="container">
-    <h2>👥 사용자 관리</h2>
-    <table border="1" width="100%">
-        <tr>
-            <th>ID</th>
-            <th>아이디</th>
-            <th>이메일</th>
-            <th>삭제</th>
-        </tr>
-        <% for (UserDTO u : users) { %>
-        <tr>
-            <td><%= u.getUserId() %></td>
-            <td><%= u.getUsername() %></td>
-            <td><%= u.getEmail() %></td>
-            <td>
-                <a href="../controller/deleteUserProcess.jsp?userId=<%= u.getUserId() %>" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
-            </td>
-        </tr>
-        <% } %>
-    </table>
-</div>
 
-<div style="position: absolute; top: 10px; right: 10px;">
-    <a href="../controller/movieList.jsp">
-        <button style="background-color: black; color: deeppink; border: 2px solid deeppink;
-                       padding: 8px 12px; margin-right: 10px; font-weight: bold; border-radius: 5px; cursor: pointer;">
-            IPP-6조
-        </button>
-    </a>
+<div class="admin-container">
+  <div class="admin-title">👥 사용자 관리</div>
 
-    <a href="../view/admin.jsp">
-        <button style="background-color: black; color: deeppink; border: 2px solid deeppink;
-                       padding: 8px 12px; font-weight: bold; border-radius: 5px; cursor: pointer;">
-            관리자 홈
-        </button>
-    </a>
+  <table class="user-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>아이디</th>
+        <th>이메일</th>
+        <th>관리</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (UserDTO u : users) { %>
+        <tr>
+          <td><%= u.getUserId() %></td>
+          <td><%= u.getUsername() %></td>
+          <td><%= u.getEmail() %></td>
+          <td>
+            <% if (u.getUserId() != 1) { %>
+              <form action="../controller/deleteUserProcess.jsp" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?')" style="display:inline;">
+                <input type="hidden" name="userId" value="<%= u.getUserId() %>">
+                <button type="submit" class="ButtonAreaButton2">삭제</button>
+              </form>
+            <% } else { %>
+              <span style="color: gray;">(관리자)</span>
+            <% } %>
+          </td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+
+  <div style="margin-top: 30px;">
+    <a href="../view/admin.jsp" class="ButtonAreaButton1">취소</a>
+  </div>
 </div>
 
 </body>
