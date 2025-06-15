@@ -1,4 +1,4 @@
-/* === Global Styles === */
+/* === 전역 스타일 (기본 폰트, 색상, 여백 등) === */
 body {
     background-color: black;
     font-family: Arial, sans-serif;
@@ -8,7 +8,7 @@ body {
     color: white;
 }
 
-/* === Header Bar === */
+/* === 상단 헤더 바 === */
 .header-wrapper {
     width: 100%;
     background-color: black;
@@ -43,12 +43,14 @@ body {
     gap: 10px;
 }
 
+/* === 로고 영역 === */
 .logo {
     font-size: 24px;
     font-weight: bold;
     color: #ff0558;
 }
 
+/* === 검색 입력창 === */
 .search input, .SearchBar {
     padding: 8px 15px;
     height: 35px;
@@ -70,7 +72,7 @@ body {
     color: #aaa;
 }
 
-/* === Buttons === */
+/* === 기본 버튼 스타일 (검정 배경) === */
 .ButtonAreaButton1 {
     border-radius: 5px;
     width: 60px;
@@ -85,6 +87,7 @@ body {
     background-color: rgb(61, 61, 61);
 }
 
+/* === 강조 버튼 스타일 (핑크 배경) === */
 .ButtonAreaButton2 {
     border-radius: 5px;
     width: 60px;
@@ -99,7 +102,7 @@ body {
     background-color: rgb(255, 39, 140);
 }
 
-/* === Main Content Area === */
+/* === 메인 콘텐츠 래퍼 === */
 .main {
     max-width: 1200px;
     width: 100%;
@@ -108,7 +111,7 @@ body {
     box-sizing: border-box;
 }
 
-/* === Card Layout === */
+/* === 카드 그리드 레이아웃 === */
 .row {
     display: flex;
     flex-wrap: wrap;
@@ -116,6 +119,7 @@ body {
     justify-content: center;
 }
 
+/* === 영화 카드 === */
 .card {
     cursor: pointer;
     width: 250px;
@@ -125,7 +129,10 @@ body {
     overflow: hidden;
     transition: transform 0.3s ease;
     color: white;
+    position: relative;
 }
+
+/* === 카드 내 평점 뱃지 === */
 .card .review-badge {
     position: absolute;
     top: 8px;
@@ -136,10 +143,8 @@ body {
     font-size: 12px;
     border-radius: 4px;
 }
-.card {
-    position: relative;  /* 리뷰 뱃지 위치 기준점 */
-}
 
+/* === 카드 호버 효과 === */
 .card:hover {
     transform: scale(1.05);
 }
@@ -166,7 +171,7 @@ body {
     color: #ccc;
 }
 
-/* === Footer Links === */
+/* === 하단 링크(푸터) === */
 .links {
     text-align: center;
     margin-top: 20px;
@@ -182,7 +187,7 @@ body {
     text-decoration: underline;
 }
 
-/* === Movie Detail Card === */
+/* === 상세 영화 정보 카드 레이아웃 === */
 .movie-detail-card {
     display: flex;
     gap: 20px;
@@ -201,7 +206,7 @@ body {
     color: white;
 }
 
-/* === Review Box === */
+/* === 간단한 리뷰 박스 === */
 .review-simple {
     background-color: #1c1c1c;
     color: white;
@@ -215,7 +220,7 @@ body {
     margin: 5px 0;
 }
 
-/* === 드롭다운 메뉴 === */
+/* === 사용자 드롭다운 메뉴 === */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -257,7 +262,7 @@ body {
     display: block;
 }
 
-/* === Form 스타일 === */
+/* === 공통 폼 요소 === */
 .form-container {
     max-width: 400px;
     margin: 120px auto;
@@ -312,7 +317,7 @@ body {
     margin-top: 25px;
 }
 
-/* === 영화 상세 정보 레이아웃 === */
+/* === 상세 페이지 내 영화 정보 === */
 .movie-info-container {
     display: flex;
     gap: 30px;
@@ -336,6 +341,7 @@ body {
     margin: 8px 0;
 }
 
+/* === 리뷰 목록과 폼 영역 === */
 .review-section {
     max-width: 800px;
     margin: 0 auto;
@@ -344,13 +350,15 @@ body {
 .hashtags {
     margin-top: 6px;
 }
+
 .hashtag {
     display: inline-block;
     font-size: 12px;
     color: #ff72a0;
     margin-right: 5px;
 }
-/* === Watcha 스타일 리뷰 리스트 === */
+
+/* === Watcha 스타일 사용자 리뷰 === */
 .review-list {
   margin-top: 30px;
   padding: 0 10px;
@@ -392,6 +400,7 @@ body {
   font-size: 15px;
   line-height: 1.5;
 }
+
 .review-textarea {
   width: 100%;
   padding: 10px;
@@ -422,6 +431,7 @@ body {
 .submit-review-button:hover {
   background-color: #ff3b7c;
 }
+
 .sub-meta {
   font-size: 14px;
   color: #bbb;
@@ -433,7 +443,8 @@ body {
   border-top: 1px solid #444;
   margin: 12px 0;
 }
-/* === Admin Page Styles === */
+
+/* === 관리자 페이지 전체 레이아웃 === */
 .admin-container {
   max-width: 600px;
   margin: 120px auto;
@@ -475,7 +486,8 @@ body {
 .button-group button {
   width: 100%;
 }
-/* === User Management Table === */
+
+/* === 사용자 관리 테이블 === */
 .user-table {
   width: 100%;
   border-collapse: collapse;

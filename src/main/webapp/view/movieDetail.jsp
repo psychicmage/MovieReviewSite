@@ -1,8 +1,12 @@
 <%@ page import="java.util.*, java.sql.*, model.util.DBUtil, model.dao.MovieDAO, model.dao.ReviewDAO, model.dto.MovieDTO, model.dto.ReviewDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+
 <%
+    // 컨트롤러에서 전달받은 데이터
     MovieDTO movie = (MovieDTO) request.getAttribute("movie");
     List<ReviewDTO> reviews = (List<ReviewDTO>) request.getAttribute("reviews");
+
+    // 로그인 여부 및 사용자 이름 확인
     Object userIdObj = session.getAttribute("userId");
     Object usernameObj = session.getAttribute("username");
 %>
@@ -15,11 +19,12 @@
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+
   <%@ include file="navbar.jsp" %>
 
   <div class="main">
 
-    <!-- 🎬 영화 기본 정보 -->
+    <!-- 영화 정보 출력 영역 -->
     <div class="movie-info-container">
       <div class="poster-box">
         <img src="../posters/<%= movie.getMovieId() %>.jpg" alt="<%= movie.getTitle() %>">
@@ -28,6 +33,7 @@
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <h2 style="margin-bottom: 5px;"><%= movie.getTitle() %></h2>
 
+          <!-- 관리자일 경우 수정/삭제 버튼 표시 -->
           <% if (userIdObj != null && (int) userIdObj == 1) { %>
             <div style="display: flex; gap: 10px;">
               <form action="editMovieForm.jsp" method="get" style="display:inline;">
@@ -57,6 +63,7 @@
         <p><strong>장르:</strong> <%= movie.getGenres() %></p>
         <hr class="info-divider">
 
+        <!-- 키워드 해시태그 출력 -->
         <div class="hashtags">
           <%
             String[] keywords = movie.getKeywordList().split(",");
@@ -73,7 +80,7 @@
       </div>
     </div>
 
-    <!-- 📝 사용자 리뷰 -->
+    <!-- 리뷰 출력 및 작성 영역 -->
     <div class="review-section">
       <h2 style="text-align: center;">사용자 리뷰</h2>
       <div class="review-list">
@@ -88,6 +95,8 @@
                     <%= i <= r.getRating() ? "⭐" : "☆" %>
                   <% } %>
                 </span>
+
+                <!-- 관리자만 리뷰 삭제 가능 -->
                 <% if (userIdObj != null && (int) userIdObj == 1) { %>
                   <form action="deleteReviewProcess.jsp" method="post" style="display:inline; float:right;" onsubmit="return confirm('정말 이 리뷰를 삭제하시겠습니까?')">
                     <input type="hidden" name="reviewId" value="<%= r.getReviewId() %>">
@@ -101,7 +110,7 @@
           </div>
         <% } %>
 
-        <%-- ✍ 리뷰 작성 폼 (로그인 시에만 보임) --%>
+        <!-- 로그인한 사용자에게만 리뷰 작성 폼 표시 -->
         <% if (userIdObj != null && usernameObj != null) { %>
           <div class="review-item">
             <div class="review-profile">✍</div>
@@ -129,6 +138,7 @@
             </div>
           </div>
         <% } else { %>
+          <!-- 비로그인 사용자 안내 -->
           <p style="margin-top: 20px;">✋ 리뷰 작성은 <a href="../view/login.jsp">로그인</a> 후 가능합니다.</p>
         <% } %>
       </div>
@@ -136,5 +146,6 @@
   </div>
 
   <%@ include file="footer.jsp" %>
+
 </body>
 </html>
