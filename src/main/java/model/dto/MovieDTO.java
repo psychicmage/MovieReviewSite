@@ -1,20 +1,27 @@
 package model.dto;
 
+/**
+ * 영화 정보를 저장하는 DTO 클래스
+ * - DB 조회 결과를 전달하거나, 화면에 출력할 데이터를 담을 때 사용
+ */
 public class MovieDTO {
-    private int movieId;
-    private String title;
-    private String releaseDate;
-    private double averageRating;
-    private int reviewCount;        // ✅ 리뷰 수 추가
+    private int movieId;               // 영화 ID
+    private String title;             // 영화 제목
+    private String releaseDate;       // 개봉일
+    private double averageRating;     // 평균 평점
+    private int reviewCount;          // 리뷰 수
 
-    private String overview;       
-    private String director;
-    private String mainCast;
-    private String keywordList;
-    private String genres;         // ✅ 장르 필드 추가
+    private String overview;          // 줄거리
+    private String director;          // 감독
+    private String mainCast;          // 주연 배우
+    private String keywordList;       // 키워드 목록
+    private String genres;            // 장르 목록
 
     public MovieDTO() {}
 
+    /**
+     * 기본 정보만 사용하는 생성자
+     */
     public MovieDTO(int movieId, String title, String releaseDate, double averageRating) {
         this.movieId = movieId;
         this.title = title;
@@ -22,7 +29,7 @@ public class MovieDTO {
         this.averageRating = averageRating;
     }
 
-    // 모든 getter/setter 추가
+    // Getter & Setter
     public int getMovieId() { return movieId; }
     public void setMovieId(int movieId) { this.movieId = movieId; }
 
@@ -52,4 +59,4 @@ public class MovieDTO {
 
     public String getGenres() { return genres; }
     public void setGenres(String genres) { this.genres = genres; }
-}  
+}

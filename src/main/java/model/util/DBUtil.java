@@ -3,10 +3,18 @@ package model.util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+/**
+ * SQLite 데이터베이스 연결을 처리하는 유틸 클래스
+ * - 프로젝트 내에서 공통으로 DB 연결을 제공
+ */
 public class DBUtil {
 
-    // JSP에서 application.getRealPath(...)로 넘겨받은 경로가 필요한 경우
-    // (현재는 사용 안 하지만 유지해도 무방)
+    /**
+     * JSP에서 DB 파일의 전체 경로를 넘겨받아 연결 (application.getRealPath(...) 사용 시)
+     * - 현재는 사용하지 않지만 유지 가능
+     * @param fullPath DB 파일의 절대 경로
+     * @return DB 연결 객체 (Connection)
+     */
     public static Connection getConnection(String fullPath) {
         try {
             Class.forName("org.sqlite.JDBC");
@@ -17,12 +25,16 @@ public class DBUtil {
         }
     }
 
-    // ✅ 웹 & 콘솔 공통 사용: 절대 경로 고정 (실제 DB만 직접 접근)
+    /**
+     * 콘솔/웹 공통 사용용으로 경로를 직접 지정한 DB 연결
+     * - 실제 배포 환경에 맞춰 경로 수정 필요
+     * @return DB 연결 객체 (Connection)
+     */
     public static Connection getConnection() {
         try {
             Class.forName("org.sqlite.JDBC");
 
-            // ❗ 본인 환경에 맞게 경로 수정
+            // 프로젝트 환경에 맞게 수정할 절대 경로
             String dbPath = "E:/MovieReview/MovieReviewSite/db/movies.db";
 
             return DriverManager.getConnection("jdbc:sqlite:" + dbPath);

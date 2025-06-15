@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="navbar.jsp" %>
+<%@ include file="navbar.jsp" %>  <%-- 상단 내비게이션 바 포함 --%>
 
 <!DOCTYPE html>
 <html>
@@ -13,6 +13,7 @@
   <div class="admin-container">
     <div class="admin-title">👑 관리자 페이지</div>
 
+    <!-- 영화 관리 섹션 -->
     <div class="admin-section">
       <h3>🎬 영화 관리</h3>
       <div class="button-group">
@@ -22,6 +23,7 @@
       </div>
     </div>
 
+    <!-- 리뷰 관리 섹션 -->
     <div class="admin-section">
       <h3>📝 리뷰 관리</h3>
       <div class="button-group">
@@ -29,6 +31,7 @@
       </div>
     </div>
 
+    <!-- 사용자 관리 섹션 -->
     <div class="admin-section">
       <h3>👥 사용자 관리</h3>
       <div class="button-group">
