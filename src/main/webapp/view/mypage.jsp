@@ -29,7 +29,7 @@
         <!-- 수정 및 탈퇴 버튼 -->
         <div class="button-row" style="margin-top: 30px;">
             <a href="../view/editEmail.jsp">
-                <button class="ButtonAreaButton1">이메일 변경</button>
+                <button class="ButtonAreaButton1">이메일<br>변경</button>
             </a>
             <a href="../view/editPassword.jsp">
                 <button class="ButtonAreaButton1">비밀번호 변경</button>

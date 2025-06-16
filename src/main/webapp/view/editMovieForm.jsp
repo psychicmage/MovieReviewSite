@@ -2,7 +2,6 @@
 <%@ page import="model.dto.MovieDTO" %>
 
 <%
-    // 컨트롤러에서 전달된 영화 정보 받기
     MovieDTO movie = (MovieDTO) request.getAttribute("movie");
 %>
 
@@ -15,46 +14,63 @@
 </head>
 <body>
 
-    <h2>영화 정보 수정</h2>
+<div class="form-container">
+    <div class="form-title">영화 정보 수정</div>
 
     <!-- 영화 정보 수정 폼 -->
     <form action="../controller/editMovieProcess.jsp" method="post">
         <!-- movieId는 hidden 필드로 전달 -->
         <input type="hidden" name="movieId" value="<%= movie.getMovieId() %>">
 
-        <!-- 입력 필드: 기존 정보는 value에 채워져 있음 -->
-        <label>제목: 
+        <!-- 제목 -->
+        <div class="form-group">
+            <label>제목</label>
             <input type="text" name="title" value="<%= movie.getTitle() %>" required>
-        </label><br>
+        </div>
 
-        <label>개봉일: 
-            <input type="text" name="releaseDate" value="<%= movie.getReleaseDate() %>" required>
-        </label><br>
+        <!-- 개봉일 -->
+        <div class="form-group">
+            <label>개봉일</label>
+            <input type="date" name="releaseDate" value="<%= movie.getReleaseDate() %>" required>
+        </div>
 
-        <label>줄거리:<br>
-            <textarea name="overview" rows="5" cols="50"><%= movie.getOverview() != null ? movie.getOverview() : "" %></textarea>
-        </label><br>
+        <!-- 줄거리 -->
+        <div class="form-group">
+            <label>줄거리</label>
+            <textarea name="overview" rows="3" required><%= movie.getOverview() != null ? movie.getOverview() : "" %></textarea>
+        </div>
 
-        <label>감독: 
-            <input type="text" name="director" value="<%= movie.getDirector() %>" required>
-        </label><br>
+        <!-- 감독 -->
+        <div class="form-group">
+            <label>감독</label>
+            <input type="text" name="director" value="<%= movie.getDirector() %>">
+        </div>
 
-        <label>주연: 
-            <input type="text" name="mainCast" value="<%= movie.getMainCast() %>" required>
-        </label><br>
+        <!-- 주연 배우 -->
+        <div class="form-group">
+            <label>주연 배우</label>
+            <input type="text" name="mainCast" value="<%= movie.getMainCast() %>">
+        </div>
 
-        <label>장르(쉼표 구분): 
+        <!-- 장르 -->
+        <div class="form-group">
+            <label>장르 (쉼표 구분)</label>
             <input type="text" name="genres" value="<%= movie.getGenres() %>">
-        </label><br>
+        </div>
 
-        <label>키워드(쉼표 구분): 
+        <!-- 키워드 -->
+        <div class="form-group">
+            <label>키워드 (쉼표 구분)</label>
             <input type="text" name="keywordList" value="<%= movie.getKeywordList() %>">
-        </label><br><br>
+        </div>
 
-        <!-- 액션 버튼 -->
-        <button type="submit">저장</button>
-        <a href="../view/admin.jsp">취소</a>
+        <!-- 버튼 영역 -->
+        <div class="button-row">
+            <button type="submit" class="ButtonAreaButton1">저장</button>
+            <a href="../view/admin.jsp" class="ButtonAreaButton2">취소</a>
+        </div>
     </form>
+</div>
 
 </body>
 </html>

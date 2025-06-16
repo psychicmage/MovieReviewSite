@@ -36,13 +36,10 @@
 
             <div class="button-row">
                 <!-- 변경 버튼 -->
-                <button type="submit" class="ButtonAreaButton1">이메일 변경</button>
+                <button type="submit" class="ButtonAreaButton1">변경</button>
 
                 <!-- 취소 버튼 (마이페이지로 이동) -->
-                <a href="../controller/mypage.jsp" class="ButtonAreaButton2" 
-                   style="text-align: center; padding: 6px 12px; display: inline-block; line-height: 30px;">
-                    취소
-                </a>
+                <a href="../controller/mypage.jsp" class="ButtonAreaButton2" >취소</a>
             </div>
         </form>
     </div>
