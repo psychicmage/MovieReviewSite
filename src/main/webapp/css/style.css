@@ -1,4 +1,4 @@
-/* === Global Styles === */
+/* === 전역 스타일 (기본 폰트, 색상, 여백 등) === */
 body {
     background-color: black;
     font-family: Arial, sans-serif;
@@ -8,7 +8,7 @@ body {
     color: white;
 }
 
-/* === Header Bar === */
+/* === 상단 헤더 바 === */
 .header-wrapper {
     width: 100%;
     background-color: black;
@@ -26,7 +26,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 40px;
+    height: 64px;
+    padding: 0px 40px;
     box-sizing: border-box;
 }
 
@@ -42,13 +43,16 @@ body {
     gap: 10px;
 }
 
+/* === 로고 영역 === */
 .logo {
     font-size: 24px;
     font-weight: bold;
     color: #ff0558;
 }
 
-.search input, .SearchBar {
+/* === 검색 입력창 === */
+.search input,
+.SearchBar {
     padding: 8px 15px;
     height: 35px;
     width: 300px;
@@ -59,9 +63,9 @@ body {
 }
 
 .SearchSelect {
-  padding: 6px;
-  margin-right: 8px;
-  font-size: 14px;
+    padding: 6px;
+    margin-right: 8px;
+    font-size: 14px;
 }
 
 .search input::placeholder,
@@ -69,7 +73,7 @@ body {
     color: #aaa;
 }
 
-/* === Buttons === */
+/* === 기본 버튼 스타일 (검정 배경) === */
 .ButtonAreaButton1 {
     border-radius: 5px;
     width: 60px;
@@ -84,6 +88,7 @@ body {
     background-color: rgb(61, 61, 61);
 }
 
+/* === 강조 버튼 스타일 (핑크 배경) === */
 .ButtonAreaButton2 {
     border-radius: 5px;
     width: 60px;
@@ -98,7 +103,7 @@ body {
     background-color: rgb(255, 39, 140);
 }
 
-/* === Main Content Area === */
+/* === 메인 콘텐츠 래퍼 === */
 .main {
     max-width: 1200px;
     width: 100%;
@@ -107,7 +112,7 @@ body {
     box-sizing: border-box;
 }
 
-/* === Card Layout === */
+/* === 카드 그리드 레이아웃 === */
 .row {
     display: flex;
     flex-wrap: wrap;
@@ -115,6 +120,7 @@ body {
     justify-content: center;
 }
 
+/* === 영화 카드 === */
 .card {
     cursor: pointer;
     width: 250px;
@@ -124,7 +130,9 @@ body {
     overflow: hidden;
     transition: transform 0.3s ease;
     color: white;
+    position: relative;
 }
+
 .card .review-badge {
     position: absolute;
     top: 8px;
@@ -134,9 +142,6 @@ body {
     padding: 2px 6px;
     font-size: 12px;
     border-radius: 4px;
-}
-.card {
-    position: relative;  /* 리뷰 뱃지 위치 기준점 */
 }
 
 .card:hover {
@@ -165,7 +170,7 @@ body {
     color: #ccc;
 }
 
-/* === Footer Links === */
+/* === 하단 링크(푸터) === */
 .links {
     text-align: center;
     margin-top: 20px;
@@ -181,7 +186,7 @@ body {
     text-decoration: underline;
 }
 
-/* === Movie Detail Card === */
+/* === 상세 영화 정보 카드 레이아웃 === */
 .movie-detail-card {
     display: flex;
     gap: 20px;
@@ -200,7 +205,7 @@ body {
     color: white;
 }
 
-/* === Review Box === */
+/* === 간단한 리뷰 박스 === */
 .review-simple {
     background-color: #1c1c1c;
     color: white;
@@ -214,7 +219,7 @@ body {
     margin: 5px 0;
 }
 
-/* === 드롭다운 메뉴 === */
+/* === 사용자 드롭다운 메뉴 === */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -237,7 +242,7 @@ body {
     background-color: #333;
     min-width: 120px;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     z-index: 1000;
 }
 
@@ -256,7 +261,7 @@ body {
     display: block;
 }
 
-/* === Form 스타일 === */
+/* === 공통 폼 요소 === */
 .form-container {
     max-width: 400px;
     margin: 120px auto;
@@ -264,7 +269,7 @@ body {
     background-color: #1c1c1c;
     border-radius: 10px;
     color: white;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     text-align: center;
 }
 
@@ -311,7 +316,7 @@ body {
     margin-top: 25px;
 }
 
-/* === 영화 상세 정보 레이아웃 === */
+/* === 상세 페이지 내 영화 정보 === */
 .movie-info-container {
     display: flex;
     gap: 30px;
@@ -335,6 +340,7 @@ body {
     margin: 8px 0;
 }
 
+/* === 리뷰 섹션 === */
 .review-section {
     max-width: 800px;
     margin: 0 auto;
@@ -343,51 +349,178 @@ body {
 .hashtags {
     margin-top: 6px;
 }
+
 .hashtag {
     display: inline-block;
     font-size: 12px;
     color: #ff72a0;
     margin-right: 5px;
 }
-/* === Watcha 스타일 리뷰 리스트 === */
+
 .review-list {
-  margin-top: 30px;
-  padding: 0 10px;
+    margin-top: 30px;
+    padding: 0 10px;
 }
 
 .review-item {
-  display: flex;
-  gap: 15px;
-  align-items: flex-start;
-  padding: 15px 0;
-  border-bottom: 1px solid #333;
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+    padding: 15px 0;
+    border-bottom: 1px solid #333;
 }
 
 .review-profile {
-  font-size: 30px;
-  width: 40px;
-  height: 40px;
-  text-align: center;
+    font-size: 30px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
 }
 
 .review-body {
-  flex: 1;
+    flex: 1;
 }
 
 .review-username {
-  font-weight: bold;
-  color: #fff;
-  margin-bottom: 5px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 5px;
 }
 
 .review-username .stars {
-  margin-left: 10px;
-  color: gold;
-  font-size: 14px;
+    margin-left: 10px;
+    color: gold;
+    font-size: 14px;
 }
 
 .review-text {
-  color: #ccc;
-  font-size: 15px;
-  line-height: 1.5;
+    color: #ccc;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.review-textarea {
+    width: 100%;
+    padding: 10px;
+    background-color: #2a2a2a;
+    border: 1px solid #555;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    resize: vertical;
+    margin-top: 5px;
+}
+
+.submit-btn-container {
+    text-align: right;
+    margin-top: 8px;
+}
+
+.submit-review-button {
+    background-color: #ff0558;
+    border: none;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.submit-review-button:hover {
+    background-color: #ff3b7c;
+}
+
+.sub-meta {
+    font-size: 14px;
+    color: #bbb;
+    margin-bottom: 10px;
+}
+
+.info-divider {
+    border: none;
+    border-top: 1px solid #444;
+    margin: 12px 0;
+}
+
+/* === 별점 출력 및 선택 === */
+.stars i {
+    color: gold;
+    margin-right: 2px;
+}
+
+.rating-select {
+    padding: 5px 10px;
+    border-radius: 6px;
+    background-color: #222;
+    color: white;
+    border: none;
+    font-size: 14px;
+}
+
+/* === 관리자 페이지 === */
+.admin-container {
+    max-width: 600px;
+    margin: 120px auto;
+    background-color: #1c1c1c;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    color: white;
+    text-align: center;
+}
+
+.admin-title {
+    font-size: 26px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.admin-section {
+    margin-bottom: 30px;
+}
+
+.admin-section h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #ff72a0;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.button-group a {
+    width: 60%;
+}
+
+.button-group button {
+    width: 100%;
+}
+
+/* === 사용자 관리 테이블 === */
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+    color: white;
+}
+
+.user-table th,
+.user-table td {
+    border: 1px solid #444;
+    padding: 10px;
+    text-align: center;
+}
+
+.user-table th {
+    background-color: #2a2a2a;
+    color: #ff72a0;
+}
+
+.user-table tr:nth-child(even) {
+    background-color: #1f1f1f;
 }
