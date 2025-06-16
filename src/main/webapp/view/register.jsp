@@ -32,10 +32,7 @@
             <!-- 가입 및 로그인 이동 버튼 -->
             <div class="button-row">
                 <button type="submit" class="ButtonAreaButton1">가입</button>
-                <a href="login.jsp" class="ButtonAreaButton2"
-                   style="text-align: center; padding: 6px 12px; display: inline-block; line-height: 30px;">
-                   로그인
-                </a>
+                <a href="login.jsp" class="ButtonAreaButton2">로그인</a>
             </div>
         </form>
     </div>

@@ -26,7 +26,7 @@ public class DBUtil {
     }
 
     /**
-     * 콘솔/웹 공통 사용용으로 경로를 직접 지정한 DB 연결
+     * 경로를 직접 지정한 DB 연결
      * - 실제 배포 환경에 맞춰 경로 수정 필요
      * @return DB 연결 객체 (Connection)
      */
@@ -35,7 +35,8 @@ public class DBUtil {
             Class.forName("org.sqlite.JDBC");
 
             // 프로젝트 환경에 맞게 수정할 절대 경로
-            String dbPath = "C:/Users/g018r/eclipse-workspace/MovieReviewSite/db/movies.db";
+            // String dbPath = "C:/Users/g018r/eclipse-workspace/MovieReviewSite/db/movies.db";
+            String dbPath = "E:/MovieReview/MovieReviewSite/db/movies.db";
 
             return DriverManager.getConnection("jdbc:sqlite:" + dbPath);
         } catch (Exception e) {

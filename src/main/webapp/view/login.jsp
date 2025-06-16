@@ -29,10 +29,7 @@
                 <button type="submit" class="ButtonAreaButton1">로그인</button>
 
                 <!-- 회원가입 페이지로 이동 -->
-                <a href="register.jsp" class="ButtonAreaButton2" 
-                   style="text-align: center; padding: 6px 12px; display: inline-block; line-height: 30px;">
-                    회원가입
-                </a>
+                <a href="register.jsp" class="ButtonAreaButton2">회원가입</a>
             </div>
         </form>
     </div>
